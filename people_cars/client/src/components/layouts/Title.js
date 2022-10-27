@@ -1,7 +1,7 @@
 
 const getStyles = () => ({
     title: {
-      fontSize: 20,
+      fontSize: 15,
       padding: '15px',
       marginBottom: '50px',
       alignContent:'center',
@@ -9,10 +9,11 @@ const getStyles = () => ({
     }
   })
   
-  const Title = () => {
+  const Title = (props) => {
+    const {title}=props
     const styles = getStyles()
   
-    return <h1 style={styles.title}>PEOPLE AND THEIR CARS</h1>
+    return <h1 style={styles.title}>{title}</h1>
   }
   
   export default Title

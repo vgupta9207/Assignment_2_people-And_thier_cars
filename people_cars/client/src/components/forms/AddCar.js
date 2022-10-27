@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client'
 import { Button, Form, Input ,Select} from 'antd'
 import { v4 as uuidv4 } from 'uuid'
 import { ADD_CAR, GET_CAR } from '../../queries/gql'
+import Title from '../layouts/Title'
 
 const AddCar = () => {
   const [id] = useState(uuidv4())
@@ -36,6 +37,8 @@ const AddCar = () => {
   }
 
   return (
+    <>
+    <Title title="Add Car"/>
     <Form
       form={form}
       name='add-contact-form'
@@ -52,7 +55,7 @@ const AddCar = () => {
       </Form.Item>
       <Form.Item
         name='make'
-        rules={[{ required: true, message: 'Please input your car year!' }]}
+        rules={[{ required: true, message: 'Please input your car make!' }]}
       >
         <Input placeholder='MAKE' />
       </Form.Item>
@@ -83,7 +86,9 @@ const AddCar = () => {
           </Button>
         )}
       </Form.Item>
-    </Form>
+  
+  </Form>
+  </>
   )
 }
 

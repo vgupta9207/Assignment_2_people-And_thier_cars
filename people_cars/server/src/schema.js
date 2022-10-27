@@ -8,7 +8,7 @@ const {find, remove,filter} = pkg;
 
 
 const typeDefs = gql`
-    type People {
+    type Person {
         id : String!
         firstName : String
         lastName : String
@@ -22,46 +22,40 @@ const typeDefs = gql`
         personId: String!
       }
 
-      type Person {
-        person : People
-        cars : [Car]
-      }
-
-    
       type Query {
-        people: [People]
-        cars : [Car]
-        personWithCars(id : String!) : Person
+        person(id: String!): Person
+        people: [Person]
+        car(id: String!): Car
+        cars: [Car]
+           personWithCars(personId: String!): [Car]
       }
 
       type Mutation {
-        addPeople(id : String!, firstName : String!, lastName : String!) : People
+        addPeople(id : String!, firstName : String!, lastName : String!) : Person
         addCars(year: Int!, make : String!, model: String!, price: Float!, personId: String!,id: String!) : Car
-        updatePeople(id : String!, firstName: String!, lastName: String!) : People
+        updatePeople(id : String!, firstName: String!, lastName: String!) : Person
         updateCar(year: Int!, make : String!, model: String!, price: Float!, personId: String!,id: String!) : Car
-        deletePeople(id : String!, firstName : String!, lastName : String!) : People  
+        deletePeople(id : String!, firstName : String!, lastName : String!) : Person  
         deleteCar( year: Int!, make : String!, model: String!, price: Float!, personId: String!,id: String!) : Car
       }
 `
 
 const resolvers = {
-  Query : {
-    people:()=>people,
-//     person: (root,args) => {
-// return find(people,{id: args.id})
-
-//     },
-    cars:()=>cars,
-    // car:(root,args) =>{
-    //     return find(cars,{id:args.id})
-        
-    //         },
-
+  Query: {
+    people: () => people,
+    person: (root, args) => {
+      return find(people, { id: args.id })
+    },
+    cars: () => cars,
+    car: (root, args) => {
+      return find(cars, {id:args.id})
+    },
     personWithCars(root,args){
       
       return filter(cars, {personId:args.personId})
     }
-  },
+  } ,
+  
   Mutation : {
     addPeople(root, args) {
       const {id, firstName, lastName} = args
@@ -90,7 +84,7 @@ const resolvers = {
     },
 
     updatePeople (root, args) {
-      const peopleToUpdate = find(people, {id : args.id})
+      const peopleToUpdate = find(person, {id : args.id})
 
       if (!peopleToUpdate) {
         throw new Error(`Couldn't find person with id ${args.id}`)
@@ -124,8 +118,8 @@ const resolvers = {
     },
 
     deletePeople (root, args) {
-      const peopleToDelete = find(people, {id : args.id})
-      remove(people, {id :args.id})
+      const peopleToDelete = find(person, {id : args.id})
+      remove(person, {id :args.id})
       remove(cars, {personId : args.id})
 
       return peopleToDelete

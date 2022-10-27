@@ -21,7 +21,7 @@ const DeleteCar = ({ id }) => {
   })
 
   const handleButtonClick = () => {
-    let result = window.confirm('Are you sure you want to delete this Car?')
+    let result = window.confirm('Are you sure you want to delete this Person?')
 
     if (result) {
       deletePerson({

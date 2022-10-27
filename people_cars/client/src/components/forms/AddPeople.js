@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client'
 import { Button, Form, Input ,Select} from 'antd'
 import { v4 as uuidv4 } from 'uuid'
 import { ADD_PERSON, GET_PEOPLE } from '../../queries/gql'
+import Title from '../layouts/Title'
 
 const AddPeople = () => {
   const [id] = useState(uuidv4())
@@ -36,6 +37,8 @@ const AddPeople = () => {
   }
 
   return (
+    <>
+    <Title title="Add Person"/>
     <Form
       form={form}
       name='add-contact-form'
@@ -48,13 +51,13 @@ const AddPeople = () => {
         name='firstName'
         rules={[{ required: true, message: 'Please input your first name!' }]}
       >
-        <Input placeholder='i.e. John' />
+        <Input placeholder='First Name' />
       </Form.Item>
       <Form.Item
         name='lastName'
         rules={[{ required: true, message: 'Please input your last name!' }]}
       >
-        <Input placeholder='i.e. Smith' />
+        <Input placeholder='Last Name' />
       </Form.Item>
       <Form.Item shouldUpdate={true}>
         {() => (
@@ -71,6 +74,7 @@ const AddPeople = () => {
         )}
       </Form.Item>
     </Form>
+    </>
   )
 }
 

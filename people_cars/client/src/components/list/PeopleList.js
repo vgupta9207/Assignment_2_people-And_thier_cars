@@ -1,7 +1,8 @@
 import { useQuery } from '@apollo/client'
 import { List } from 'antd'
 import {  GET_PEOPLE } from "../../queries/gql"
-import People from '../listItems/People'
+import People from '../listitems/People'
+import Title from '../layouts/Title'
 
 const getStyles = () => ({
   list: {
@@ -18,6 +19,8 @@ const PeopleList = () => {
   if (error) return `Error! ${error.message}`
 
   return (
+    <>
+    <Title title="Records"/>
     <List grid={{ gutter: 20, column: 1 }} style={styles.list}>
       {data.people.map(({  id,
           firstName,
@@ -29,6 +32,7 @@ const PeopleList = () => {
         </List.Item>
       ))}
     </List>
+    </>
   )
 }
 
