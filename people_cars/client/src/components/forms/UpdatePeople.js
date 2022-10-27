@@ -9,7 +9,7 @@ const UpdatePeople = props => {
 
   const [form] = Form.useForm()
   const [, forceUpdate] = useState()
-
+  console.log("Entery")
   useEffect(() => {
     forceUpdate({})
   }, [])

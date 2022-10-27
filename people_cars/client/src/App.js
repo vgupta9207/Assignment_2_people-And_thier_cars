@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PeopleList from './components/list/PeopleList';
 import Cars from './components/list/Cars';
 import PeopleWithCars from './components/list/PeopleWithCars';
+import Car from './components/listitems/Car';
 
 
 const App=()=> {
@@ -22,6 +23,8 @@ const App=()=> {
      <Title/>
      <AddPeople/>
      <AddCar/>
+     {/* <PeopleList/>
+     <Car/> */}
     <PeopleWithCars/>
     </div>
     </ApolloProvider>

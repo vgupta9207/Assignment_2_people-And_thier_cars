@@ -11,7 +11,7 @@ const getStyles = () => ({
   }
 })
 const Car = props => {
-  const { id, year, make,model,personId,price} = props
+  const { id, year, model ,price} = props
   const styles = getStyles()
 
   const [editMode, setEditMode] = useState(false)
@@ -24,9 +24,9 @@ const Car = props => {
         <UpdateCar
           id={id}
           year={year}
-          make={make}
+          
           model={model}
-          personId={personId}
+          
           price={price}
           onButtonClick={handleButtonClick}
         />
@@ -38,8 +38,7 @@ const Car = props => {
             <DeleteCar id={id} />
           ]}
         >
-          Year:{year}
-          Price:{price}
+          {year}  {model}{"->"}{price}
         </Card>
       )}
     </>

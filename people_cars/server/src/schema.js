@@ -67,7 +67,7 @@ const resolvers = {
       return newPeople
     },
 
-    addCars (root, args) {
+    addCars(root, args) {
         const {year, make, model, price, personId, id} = args
         const newCar = {
             id : id,
@@ -82,7 +82,7 @@ const resolvers = {
         return newCar
     },
 
-    updatePeople (root, args) {
+    updatePeople(root, args) {
       const peopleToUpdate = find(people, {id : args.id})
 
       if (!peopleToUpdate) {
@@ -95,7 +95,7 @@ const resolvers = {
       return peopleToUpdate
     },
 
-    updateCar (root, args) {
+    updateCar(root, args) {
       const carToUpdate = find(cars, {id : args.id})
 
 
@@ -116,7 +116,7 @@ const resolvers = {
       return carToUpdate
     },
 
-    deletePeople (root, args) {
+    deletePeople(root, args) {
       const peopleToDelete = find(people, {id : args.id})
       remove(person, {id :args.id})
       remove(cars, {personId : args.id})
@@ -124,7 +124,7 @@ const resolvers = {
       return peopleToDelete
     },
 
-    deleteCar (root, args) {
+    deleteCar(root, args) {
       const carToDelete = find(cars, {id: args.id})
       remove(cars, {id : args.id})
 

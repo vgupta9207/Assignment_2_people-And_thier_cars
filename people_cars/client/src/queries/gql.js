@@ -32,19 +32,25 @@ query Query($personId: String!) {
 }`
 
 export const GET_PERSON_WITH_CARS = gql`
-query Query($personId: String!) {
-  personWithCars(personId: $personId) {
-    
+{
+  people {
+    id
+    firstName
+    lastName
+  }
+  cars {
+    id
     year
     make
     model
     price
     personId
   }
-}`
+}
+`;
 
 export const ADD_PERSON = gql`
-  mutation AddPerson($id: String!, $firstName: String!, $lastName: String!) {
+  mutation addPeople($id: String!, $firstName: String!, $lastName: String!) {
     addPeople(id: $id, firstName: $firstName, lastName: $lastName) {
       id
       firstName
@@ -54,8 +60,8 @@ export const ADD_PERSON = gql`
 `
 
 export const ADD_CAR = gql`
-  mutation AddCar($id: String!,  $year: String!, $make: String!, $model: String!, $price: String!, $personId: String!) {
-    addCar(id: $id,  year: $year, make: $make, model: $model, price: $price, personId: $personId) {
+  mutation addCars($id: String!,  $year: String!, $make: String!, $model: String!, $price: String!, $personId: String!) {
+    addCars(id: $id,  year: $year, make: $make, model: $model, price: $price, personId: $personId) {
       id
       year
     make
@@ -67,7 +73,7 @@ export const ADD_CAR = gql`
 `
 
 export const UPDATE_PERSON = gql`
-  mutation UpdatePerson($id: String!, $firstName: String!, $lastName: String!) {
+  mutation updatePeople($id: String!, $firstName: String!, $lastName: String!) {
     updatePerson(id: $id, firstName: $firstName, lastName: $lastName) {
       id
       firstName
@@ -77,7 +83,7 @@ export const UPDATE_PERSON = gql`
 `
 
 export const UPDATE_CAR = gql`
-  mutation UpdateCar($id: String!,  $year: String!, $make: String!, $model: String!, $price: String!, $personId: String!) {
+  mutation updateCar($id: String!,  $year: String!, $make: String!, $model: String!, $price: String!, $personId: String!) {
     updateCar(id: $id,  year: $year, make: $make, model: $model, price: $price, personId: $personId) {
       id
       year
@@ -91,8 +97,8 @@ export const UPDATE_CAR = gql`
 
 
 export const DELETE_PERSON = gql`
-  mutation DeletePerson($id: String!) {
-    DeletePerson(id: $id) {
+  mutation deletePeople($id: String!) {
+    deletePeople(id: $id) {
       id
       firstName
       lastName
@@ -100,7 +106,7 @@ export const DELETE_PERSON = gql`
   }
 `
 export const DELETE_CAR = gql`
-  mutation DeleteCar($id: String!) {
+  mutation deleteCar($id: String!) {
     deleteCar(id: $id) {
         id
         year

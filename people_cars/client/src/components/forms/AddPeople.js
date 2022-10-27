@@ -17,11 +17,11 @@ const AddPeople = () => {
   }, [])
 
   const onFinish = values => {
-    let { firstName,lastname } = values
+    let { firstName,lastName } = values
 
     AddPerson({
       variables: {
-       id,firstName,lastname
+       id,firstName,lastName
       },
       update: (cache, { data: { AddPerson } }) => {
         const data = cache.readQuery({ query: GET_PEOPLE })

@@ -12,7 +12,7 @@ const DeleteCar = ({ id }) => {
       cache.writeQuery({
         query: GET_CAR,
         data: {
-          contacts: filter(cars, o => {
+          cars: filter(cars, o => {
             return o.id !== deleteCar.id
           })
         }

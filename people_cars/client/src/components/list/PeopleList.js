@@ -23,13 +23,13 @@ const {peopleWithCars}=props
     <List grid={{ gutter: 20, column: 1 }} style={styles.list}>
       {peopleWithCars.map(({  id,
           firstName,
-          lastName,carMap}) => (
+          lastName,carMap }) => (
         <List.Item key={id}>
            <People id={id}
           firstName={firstName}
-          lastName={lastName}>
-          carMap:{carMap} 
-</People>
+          lastName={lastName}
+          carMap={carMap}/>
+
         </List.Item>
       ))}
     </List>
