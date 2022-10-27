@@ -1,16 +1,16 @@
 import { DeleteOutlined } from '@ant-design/icons'
 import { useMutation } from '@apollo/client'
 
-import { GET_CARS, DELETE_CAR } from '../../queries/gql'
+import { GET_CAR, DELETE_CAR } from '../../queries/gql'
 
 import filter from 'lodash.filter'
 
 const DeleteCar = ({ id }) => {
   const [deleteCar] = useMutation(DELETE_CAR, {
     update(cache, { data: { deleteCar } }) {
-      const { cars } = cache.readQuery({ query: GET_CARS })
+      const { cars } = cache.readQuery({ query: GET_CAR })
       cache.writeQuery({
-        query: GET_CARS,
+        query: GET_CAR,
         data: {
           contacts: filter(cars, o => {
             return o.id !== deleteCar.id

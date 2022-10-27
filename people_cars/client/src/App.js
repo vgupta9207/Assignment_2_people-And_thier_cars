@@ -3,7 +3,10 @@ import AddCar from "./components/forms/AddCar";
 import AddPeople from "./components/forms/AddPeople";
 import Title from "./components/layouts/Title";
 import "./App.css"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PeopleList from './components/list/PeopleList';
+import Cars from './components/list/Cars';
+import PeopleWithCars from './components/list/PeopleWithCars';
 
 
 const App=()=> {
@@ -13,14 +16,16 @@ const App=()=> {
     cache: new InMemoryCache()
   })
   return (
+   
     <ApolloProvider client={client}>
     <div className="App">
      <Title/>
      <AddPeople/>
      <AddCar/>
-     <PeopleList/>
+    <PeopleWithCars/>
     </div>
     </ApolloProvider>
+    
   );
 }
 

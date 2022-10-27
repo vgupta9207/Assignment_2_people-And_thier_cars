@@ -34,7 +34,7 @@ query Query($personId: String!) {
 export const GET_PERSON_WITH_CARS = gql`
 query Query($personId: String!) {
   personWithCars(personId: $personId) {
-    id
+    
     year
     make
     model

@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { List } from 'antd'
 import { GET_CAR } from "../../queries/gql"
-import Car from '../listItems/Car'
+import Car from '../listitems/Car'
 
 const getStyles = () => ({
   list: {
@@ -15,7 +15,8 @@ const Cars = () => {
 
   const { loading, error, data } = useQuery(GET_CAR)
   if (loading) return 'Loading...'
-  if (error) return `Error! ${error.message}`
+  else if (error) return `Error! ${error.message}`
+  console.log(data);
 
   return (
     <List grid={{ gutter: 20, column: 1 }} style={styles.list}>

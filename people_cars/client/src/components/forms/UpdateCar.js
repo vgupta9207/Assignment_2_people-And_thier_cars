@@ -1,7 +1,7 @@
-import { useMutation } from '@apollo/client'
-import { Button, Form, Input } from 'antd'
+import { useMutation,useQuery } from '@apollo/client'
+import { Button, Form, Input,Select } from 'antd'
 import { useEffect, useState } from 'react'
-import { UPDATE_CAR } from '../../queries/gql'
+import { UPDATE_CAR ,GET_PEOPLE} from '../../queries/gql'
 
 const UpdateCar = props => {
   const { id, year, make, model, price, personId } = props
@@ -10,9 +10,14 @@ const UpdateCar = props => {
   const [form] = Form.useForm()
   const [, forceUpdate] = useState()
 
+
   useEffect(() => {
     forceUpdate({})
   }, [])
+
+  const { loading, error, data } = useQuery(GET_PEOPLE)
+  if (loading) return 'Loading...'
+  if (error) return `Error! ${error.message}`
 
   const onFinish = values => {
     const { year, make, model, price, personId } = values
@@ -62,6 +67,7 @@ const UpdateCar = props => {
         <Input placeholder='PRICE' step="0.01" type="currency"/>
         
       </Form.Item>
+      
       <Form.Item shouldUpdate={true}>
         {() => (
           <Button

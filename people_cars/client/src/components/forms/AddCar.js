@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation,useQuery } from '@apollo/client'
 import { Button, Form, Input ,Select} from 'antd'
 import { v4 as uuidv4 } from 'uuid'
-import { ADD_CAR, GET_CAR } from '../../queries/gql'
+import { ADD_CAR, GET_CAR, GET_PEOPLE } from '../../queries/gql'
 import Title from '../layouts/Title'
 
 const AddCar = () => {
   const [id] = useState(uuidv4())
   const [AddCar] = useMutation(ADD_CAR)
+  const [personId, setPersonId] = useState("");
 
   const [form] = Form.useForm()
   const [, forceUpdate] = useState()
@@ -15,6 +16,10 @@ const AddCar = () => {
   useEffect(() => {
     forceUpdate({})
   }, [])
+
+  const { loading, error, data } = useQuery(GET_PEOPLE)
+  if (loading) return 'Loading...'
+  if (error) return `Error! ${error.message}`
 
   const onFinish = values => {
     let { year, make, model, price, personId } = values
@@ -72,6 +77,18 @@ const AddCar = () => {
         <Input placeholder='PRICE' step="0.01" type="currency"/>
         
       </Form.Item>
+      <Select
+                style={{ width: "180px" }}
+                placeholder="Select the owner ID"
+                name="personId"
+                onChange={(value) => setPersonId(value)}
+              >
+                {data.people.map((person) => (
+                  <Select.Option key={person.id} value={person.id}>
+                    {person.id}
+                  </Select.Option>
+                ))}
+              </Select>
       <Form.Item shouldUpdate={true}>
         {() => (
           <Button

@@ -3,7 +3,6 @@ import { people, cars } from './peopleCarsScheme.js'
 import pkg from 'lodash';
 
 
-
 const {find, remove,filter} = pkg;
 
 
@@ -27,7 +26,7 @@ const typeDefs = gql`
         people: [Person]
         car(id: String!): Car
         cars: [Car]
-           personWithCars(personId: String!): [Car]
+        personWithCars(personId: String!): [Car]
       }
 
       type Mutation {
@@ -50,7 +49,7 @@ const resolvers = {
     car: (root, args) => {
       return find(cars, {id:args.id})
     },
-    personWithCars(root,args){
+    personWithCars:(root,args)=>{
       
       return filter(cars, {personId:args.personId})
     }
@@ -84,7 +83,7 @@ const resolvers = {
     },
 
     updatePeople (root, args) {
-      const peopleToUpdate = find(person, {id : args.id})
+      const peopleToUpdate = find(people, {id : args.id})
 
       if (!peopleToUpdate) {
         throw new Error(`Couldn't find person with id ${args.id}`)
@@ -118,7 +117,7 @@ const resolvers = {
     },
 
     deletePeople (root, args) {
-      const peopleToDelete = find(person, {id : args.id})
+      const peopleToDelete = find(people, {id : args.id})
       remove(person, {id :args.id})
       remove(cars, {personId : args.id})
 

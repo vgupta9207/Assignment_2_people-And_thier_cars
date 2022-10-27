@@ -4,6 +4,7 @@ import { EditOutlined } from '@ant-design/icons'
 import { Card } from 'antd'
 import DeletePerson from '../buttons/DeletePerson'
 import UpdatePeople from '../forms/UpdateCar'
+import Car from './Car'
 
 const getStyles = () => ({
   card: {
@@ -11,7 +12,7 @@ const getStyles = () => ({
   }
 })
 const People = props => {
-  const { id, firstName,lastName} = props
+  const { id, firstName,lastName,carMap} = props
   const styles = getStyles()
 
   const [editMode, setEditMode] = useState(false)
@@ -32,11 +33,14 @@ const People = props => {
           style={styles.card}
           actions={[
             <EditOutlined key='edit' onClick={handleButtonClick} />,
-            <DeletePerson id={id} />
+            <DeletePerson id={id}  />
           ]}
         >
           {firstName}
           {lastName }
+          {carMap.map(({ id, make, model }) => (
+            <Car key={id} id={id} make={make} model={model} />
+          ))}
         </Card>
       )}
     </>
