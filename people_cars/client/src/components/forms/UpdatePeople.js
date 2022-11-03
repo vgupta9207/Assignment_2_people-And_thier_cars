@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { UPDATE_PERSON } from '../../queries/gql'
 
 const UpdatePeople = props => {
-  const { id,firstName,lastname } = props
+  const { id,firstName,lastName } = props
   const [updatePerson] = useMutation(UPDATE_PERSON)
 
   const [form] = Form.useForm()
@@ -15,11 +15,11 @@ const UpdatePeople = props => {
   }, [])
 
   const onFinish = values => {
-    const { firstName,lastname} = values
+    const { firstName,lastName} = values
 
     updatePerson({
       variables: {
-        id,firstName,lastname
+        id,firstName,lastName
       }
     })
 

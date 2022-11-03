@@ -8,7 +8,7 @@ import Title from '../layouts/Title'
 const AddCar = () => {
   const [id] = useState(uuidv4())
   const [AddCar] = useMutation(ADD_CAR)
-  const [personId, setPersonId] = useState("");
+  const [personId, setPersonId] = useState("")
 
   const [form] = Form.useForm()
   const [, forceUpdate] = useState()
@@ -23,10 +23,13 @@ const AddCar = () => {
 
   const onFinish = values => {
     let { year, make, model, price, personId } = values
+    console.log("Id",personId)
+    year=parseInt(year)
+    price=parseFloat(price)
 
     AddCar({
       variables: {
-        year, make, model, price, personId
+       id, year, make, model, price, personId
       },
       update: (cache, { data: { AddCar } }) => {
         const data = cache.readQuery({ query: GET_CAR })
@@ -53,10 +56,10 @@ const AddCar = () => {
       style={{ marginBottom: '40px' }}
     >
       <Form.Item
-        name='Year'
+        name='year'
         rules={[{ required: true, message: 'Please input your car year!' }]}
       >
-        <Input type="Number" max={2022}  placeholder='YEAR'/>
+        <Input max={2022}  placeholder='YEAR'/>
       </Form.Item>
       <Form.Item
         name='make'
@@ -77,18 +80,26 @@ const AddCar = () => {
         <Input placeholder='PRICE' step="0.01" type="currency"/>
         
       </Form.Item>
+      <Form.Item
+        name='personId'
+        rules={[{ required: true, message: 'Please select the owner!' }]}
+      >
       <Select
                 style={{ width: "180px" }}
                 placeholder="Select the owner ID"
-                name="personId"
-                onChange={(value) => setPersonId(value)}
+                name='personId'
+                onChange={(value) => {setPersonId(value); console.log(personId)}
+                }
               >
-                {data.people.map((person) => (
-                  <Select.Option key={person.id} value={person.id}>
-                    {person.id}
+                {data.people.map((data) => (
+                  <Select.Option key={data.id} value={data.id}>
+                    {data.id}
                   </Select.Option>
-                ))}
+                ))
+                }
+
               </Select>
+              </Form.Item>
       <Form.Item shouldUpdate={true}>
         {() => (
           <Button
@@ -103,7 +114,7 @@ const AddCar = () => {
           </Button>
         )}
       </Form.Item>
-  
+
   </Form>
   </>
   )

@@ -118,8 +118,8 @@ const resolvers = {
 
     deletePeople(root, args) {
       const peopleToDelete = find(people, {id : args.id})
-      remove(person, {id :args.id})
-      remove(cars, {personId : args.id})
+      remove(people, {id :args.id})
+      // remove(cars, {personId : args.id})
 
       return peopleToDelete
     },

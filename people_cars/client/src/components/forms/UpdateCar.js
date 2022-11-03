@@ -1,5 +1,5 @@
 import { useMutation,useQuery } from '@apollo/client'
-import { Button, Form, Input,Select } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { useEffect, useState } from 'react'
 import { UPDATE_CAR ,GET_PEOPLE} from '../../queries/gql'
 
@@ -20,7 +20,10 @@ const UpdateCar = props => {
   if (error) return `Error! ${error.message}`
 
   const onFinish = values => {
-    const { year, make, model, price, personId } = values
+    let { year, make, model, price, personId } = values
+
+    year=parseInt(year)
+    price=parseFloat(price)
 
     updateCar({
       variables: {
@@ -74,7 +77,7 @@ const UpdateCar = props => {
             type='primary'
             htmlType='submit'
             disabled={
-              (!form.isFieldTouched('firstName') && !form.isFieldTouched('lastName')) ||
+              (!form.isFieldTouched('year') && !form.isFieldTouched('make') && !form.isFieldTouched('model')&& !form.isFieldTouched('price')) ||
               form.getFieldsError().filter(({ errors }) => errors.length).length
             }
           >

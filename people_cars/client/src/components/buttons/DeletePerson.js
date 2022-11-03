@@ -6,7 +6,7 @@ import { GET_PEOPLE, DELETE_PERSON } from '../../queries/gql'
 import filter from 'lodash.filter'
 
 const DeletePerson = ({ id }) => {
-    console.log("Entery")
+
   const [DeletePerson] = useMutation(DELETE_PERSON, {
     update(cache, { data: { DeletePerson } }) {
       const { people } = cache.readQuery({ query: GET_PEOPLE })
