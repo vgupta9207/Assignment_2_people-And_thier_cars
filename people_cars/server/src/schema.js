@@ -9,8 +9,8 @@ const {find, remove,filter} = pkg;
 const typeDefs = gql`
     type Person {
         id : String!
-        firstName : String
-        lastName : String
+        firstName : String!
+        lastName : String!
       }
       type Car {
         id: String!
@@ -34,8 +34,8 @@ const typeDefs = gql`
         addCars(year: Int!, make : String!, model: String!, price: Float!, personId: String!,id: String!) : Car
         updatePeople(id : String!, firstName: String!, lastName: String!) : Person
         updateCar(year: Int!, make : String!, model: String!, price: Float!, personId: String!,id: String!) : Car
-        deletePeople(id : String!, firstName : String!, lastName : String!) : Person  
-        deleteCar( year: Int!, make : String!, model: String!, price: Float!, personId: String!,id: String!) : Car
+        deletePeople(id : String!) : Person  
+        deleteCar( id: String!) : Car
       }
 `
 
@@ -117,15 +117,13 @@ const resolvers = {
     },
 
     deletePeople(root, args) {
-      const peopleToDelete = find(people, {id : args.id})
+      const peopleToDelete = find(people, {id : args.id});
       remove(people, {id :args.id})
-      // remove(cars, {personId : args.id})
-
-      return peopleToDelete
+  return peopleToDelete
     },
 
     deleteCar(root, args) {
-      const carToDelete = find(cars, {id: args.id})
+      const carToDelete = find(cars, {id: args.id});
       remove(cars, {id : args.id})
 
       return carToDelete

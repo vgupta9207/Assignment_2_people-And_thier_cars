@@ -6,13 +6,14 @@ import { GET_CAR, DELETE_CAR } from '../../queries/gql'
 import filter from 'lodash.filter'
 
 const DeleteCar = ({ id }) => {
+
   const [deleteCar] = useMutation(DELETE_CAR, {
     update(cache, { data: { deleteCar } }) {
       const { cars } = cache.readQuery({ query: GET_CAR })
       cache.writeQuery({
         query: GET_CAR,
         data: {
-          cars: filter(cars, o => {
+          cars: filter(cars, (o)=> {
             return o.id !== deleteCar.id
           })
         }
